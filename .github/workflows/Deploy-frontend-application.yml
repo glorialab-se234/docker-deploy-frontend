@@ -52,6 +52,9 @@ jobs:
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            sudo apt-get update
+            sudo apt-get install -y docker
+            sudo apt-get install -y docker-compose           
 
             sudo usermod -aG docker ubuntu
             cd /home/ubuntu/frontend
@@ -59,4 +62,6 @@ jobs:
             docker-compose down
             docker-compose pull
             docker-compose up -d
+            rm -rf /home/ubuntu/frontend
+            
             
